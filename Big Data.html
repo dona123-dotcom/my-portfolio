@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Data Lesson Presentation</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f0f4f9;
+            --slide-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #475569;
+            --primary: #4f46e5;
+            --primary-light: #e0e7ff;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --accent-blue: #0284c7;
+            --card-border: #e2e8f0;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Presentation Container */
+        .presentation-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Slide Styling */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--slide-bg);
+            border-radius: 24px;
+            padding: 48px 56px;
+            box-shadow: var(--shadow);
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 2px solid #ffffff;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Header Elements */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        p.description {
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Content Boxes & Cards */
+        .content-box {
+            background: #f8fafc;
+            border: 2px solid var(--card-border);
+            border-radius: 18px;
+            padding: 28px;
+            margin-top: 15px;
+        }
+
+        .example-box {
+            background: #fff7ed;
+            border-left: 6px solid var(--accent-orange);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 20px;
+        }
+
+        .example-box h4 {
+            color: var(--accent-orange);
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-box p {
+            font-size: 1.3rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        /* Large Title Slide Layout */
+        .title-slide {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+        }
+
+        .title-slide h1 {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .title-slide p {
+            font-size: 1.8rem;
+            color: #475569;
+            max-width: 800px;
+        }
+
+        /* 5Vs Highlight Layout */
+        .v-hero {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            height: 100%;
+        }
+
+        .v-badge {
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--primary);
+            background: var(--primary-light);
+            width: 160px;
+            height: 160px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Navigation Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 2px solid var(--card-border);
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            margin: 0 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-wrapper">
+
+        <!-- Slide 1: Title -->
+        <div class="slide title-slide active">
+            <div class="badge"><i class="fa-solid fa-graduation-cap"></i> Lesson 3</div>
+            <h1>Big Data Concepts</h1>
+            <p>Understanding Large-Scale Data, Sources, 5Vs & Data Types</p>
+        </div>
+
+        <!-- Slide 2: What is Big Data? -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-lightbulb"></i> Introduction</span>
+                <span class="slide-number">02 / 16</span>
+            </div>
+            <div>
+                <h2>What is Big Data?</h2>
+                <div class="content-box">
+                    <p class="description">A collection of <strong>large and complex data</strong> that cannot be efficiently processed using traditional tools (like standard Excel spreadsheets).</p>
+                </div>
+            </div>
+            <div class="example-box">
+                <h4><i class="fa-solid fa-chart-line"></i> Why it Matters</h4>
+                <p>Analyzing Big Data empowers analysts, researchers, and entrepreneurs to make <strong>better and faster decisions</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Source 1 - IoT -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge" style="background:#e0f2fe; color:#0284c7;"><i class="fa-solid fa-wifi"></i> Source 1</span>
+                <span class="slide-number">03 / 16</span>
+            </div>
+            <div>
+                <h2>Internet-Connected Devices (IoT)</h2>
+                <p class="description">Smart refrigerators, smartwatches, and connected cars continuously collect and generate data regarding location, temperature, behavior, and energy usage.</p>
+            </div>
+            <div class="example-box" style="background:#f0f9ff; border-color:#0284c7;">
+                <h4 style="color:#0284c7;"><i class="fa-solid fa-clock"></i> Example</h4>
+                <p>A smartwatch measures your <strong>heart rate, physical activity level, and body temperature</strong> and transmits it directly to a mobile application.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Source 2 - Social Media -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge" style="background:#fce7f3; color:#ec4899;"><i class="fa-solid fa-hashtag"></i> Source 2</span>
+                <span class="slide-number">04 / 16</span>
+            </div>
+            <div>
+                <h2>Social Media Platforms</h2>
+                <p class="description">Daily user activity creates high volumes of data from posts, comments, photos, videos, and likes <i>(Note: these sources may sometimes be unverified)</i>.</p>
+            </div>
+            <div class="example-box" style="background:#fdf2f8; border-color:#ec4899;">
+                <h4 style="color:#ec4899;"><i class="fa-solid fa-camera"></i> Example</h4>
+                <p>Sharing an Instagram photo or Facebook post generates data about the <strong>exact time, location, reactions, and hashtags</strong> used.</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Source 3 - Financial Data -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge" style="background:#dcfce7; color:#16a34a;"><i class="fa-solid fa-wallet"></i> Source 3</span>
+                <span class="slide-number">05 / 16</span>
+            </div>
+            <div>
+                <h2>Financial Transactions</h2>
+                <p class="description">Electronic payments, online banking, and stock market trading contribute to massive streams of transactional data.</p>
+            </div>
+            <div class="example-box" style="background:#f0fdf4; border-color:#16a34a;">
+                <h4 style="color:#16a34a;"><i class="fa-solid fa-credit-card"></i> Example</h4>
+                <p>An online purchase made with a credit card records details about the <strong>amount spent, store name, user ID, and geographic location</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Source 4 - Smart Devices -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-mobile-screen"></i> Source 4</span>
+                <span class="slide-number">06 / 16</span>
+            </div>
+            <div>
+                <h2>Smart Devices & Mobiles</h2>
+                <p class="description">Smartphones, security cameras, and smart home appliances capture continuous data on user interactions, settings, and habits.</p>
+            </div>
+            <div class="example-box" style="background:#fffbeb; border-color:#d97706;">
+                <h4 style="color:#d97706;"><i class="fa-solid fa-location-dot"></i> Example</h4>
+                <p>Your mobile phone constantly tracks your <strong>geographic position</strong> and logs the specific places visited and applications opened.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Source 5 - Digital Content -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-play"></i> Source 5</span>
+                <span class="slide-number">07 / 16</span>
+            </div>
+            <div>
+                <h2>Digital Content Consumption</h2>
+                <p class="description">Streaming video, images, and online audio content generate massive metrics regarding views, watch time, and user engagement.</p>
+            </div>
+            <div class="example-box" style="background:#faf5ff; border-color:#9333ea;">
+                <h4 style="color:#9333ea;"><i class="fa-brands fa-youtube"></i> Example</h4>
+                <p>Watching a YouTube video records data on <strong>watch duration, user interaction, comments, and share counts</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Source 6 & 7 - Government & Spatial -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-earth-americas"></i> Sources 6 & 7</span>
+                <span class="slide-number">08 / 16</span>
+            </div>
+            <div>
+                <h2>Government & Spatial Data</h2>
+                <div class="content-box">
+                    <p class="description"><strong>Government Data:</strong> Population registers, censuses, and tax data (e.g., regional population income surveys).</p>
+                </div>
+                <div class="content-box" style="margin-top:15px;">
+                    <p class="description"><strong>Geographic & Spatial Data:</strong> Satellites and GPS devices (e.g., Google Maps processing speed and traffic density to optimize routes).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: The 5Vs - Volume -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-cubes"></i> The 5Vs of Big Data</span>
+                <span class="slide-number">09 / 16</span>
+            </div>
+            <div class="v-hero">
+                <div class="v-badge">1</div>
+                <div>
+                    <h2>Volume</h2>
+                    <p class="description">Refers to the <strong>massive quantities</strong> of data collected and stored. Modern storage capacity lets us accumulate data continuously from millions of sources.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: The 5Vs - Velocity -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-bolt"></i> The 5Vs of Big Data</span>
+                <span class="slide-number">10 / 16</span>
+            </div>
+            <div class="v-hero">
+                <div class="v-badge" style="background:#fef3c7; color:#d97706;">2</div>
+                <div>
+                    <h2>Velocity</h2>
+                    <p class="description">Refers to the <strong>speed</strong> at which new data is generated and processed in real time (e.g., instant card payments, live media feeds, connected sensors).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: The 5Vs - Variety -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-shapes"></i> The 5Vs of Big Data</span>
+                <span class="slide-number">11 / 16</span>
+            </div>
+            <div class="v-hero">
+                <div class="v-badge" style="background:#fce7f3; color:#ec4899;">3</div>
+                <div>
+                    <h2>Variety</h2>
+                    <p class="description">Refers to the <strong>diverse formats</strong> of data collected—ranging from traditional structured databases to unstructured audio, text, and videos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: The 5Vs - Veracity -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-shield-halved"></i> The 5Vs of Big Data</span>
+                <span class="slide-number">12 / 16</span>
+            </div>
+            <div class="v-hero">
+                <div class="v-badge" style="background:#e0f2fe; color:#0284c7;">4</div>
+                <div>
+                    <h2>Veracity</h2>
+                    <p class="description">Refers to data <strong>reliability and quality</strong>. Data may contain errors or biases, making verification crucial before extracting insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: The 5Vs - Value -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-gem"></i> The 5Vs of Big Data</span>
+                <span class="slide-number">13 / 16</span>
+            </div>
+            <div class="v-hero">
+                <div class="v-badge" style="background:#dcfce7; color:#16a34a;">5</div>
+                <div>
+                    <h2>Value</h2>
+                    <p class="description">Refers to the <strong>actionable usefulness</strong> derived from data. Collecting data is only useful if it delivers real benefit to people or organizations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Types - Structured & Unstructured -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-layer-group"></i> Types of Big Data</span>
+                <span class="slide-number">14 / 16</span>
+            </div>
+            <div>
+                <h2>Structured vs. Unstructured</h2>
+                <div class="content-box">
+                    <p class="description"><strong>1. Structured Data:</strong> Organized in neat tables with rows & columns (e.g., customer banking records, transaction history).</p>
+                </div>
+                <div class="content-box" style="margin-top:15px;">
+                    <p class="description"><strong>2. Unstructured Data:</strong> Has no predefined structure and cannot fit into tables (e.g., text posts, photos, raw video feeds).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Types - Semi-Structured -->
+        <div class="slide">
+            <div class="slide-header">
+                <span class="badge"><i class="fa-solid fa-sliders"></i> Types of Big Data</span>
+                <span class="slide-number">15 / 16</span>
+            </div>
+            <div>
+                <h2>Semi-Structured Data</h2>
+                <div class="content-box">
+                    <p class="description">A <strong>hybrid format</strong> combining unstructured content with organizational metadata markers.</p>
+                </div>
+            </div>
+            <div class="example-box">
+                <h4><i class="fa-solid fa-envelope"></i> Example: Email Messages</h4>
+                <p>The message body contains <i>unstructured text</i>, but it also has <i>structured tags</i> such as Sender, Recipient, Subject, and Date.</p>
+            </div>
+        </div>
+
+        <!-- Slide 16: Important Note for Students -->
+        <div class="slide title-slide" style="background: linear-gradient(135deg, #fef3c7 0%, #ecfdf5 100%);">
+            <div class="badge" style="background:#ffffff;"><i class="fa-solid fa-circle-check"></i> Key Takeaway</div>
+            <h1 style="color:#065f46; font-size: 3.2rem;">Dear Students</h1>
+            <p style="color:#1e3a8a; font-size: 1.6rem; font-weight:600; line-height:1.6;">
+                Always make sure to <strong>record data accurately</strong> and <strong>cite your sources</strong>!
+                <br><br>
+                Proper citation enhances data reliability and enables easy verification of facts.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button class="btn" id="prevBtn" onclick="prevSlide()" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="btn" id="nextBtn" onclick="nextSlide()">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+
+            const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize progress
+        updateSlide();
+    </script>
+</body>
+</html>

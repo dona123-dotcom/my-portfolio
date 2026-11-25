@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A collection of my websites, digital projects, and PDF presentations.">
+  <title>My Digital Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,.07);
+      --panel-border: rgba(255,255,255,.12);
+      --text: #f5f7ff;
+      --muted: #aab3ca;
+      --accent: #8b7cff;
+      --accent2: #43d9c5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(139,124,255,.22), transparent 32rem),
+        radial-gradient(circle at 90% 30%, rgba(67,217,197,.13), transparent 28rem),
+        var(--bg);
+      min-height: 100vh;
+    }
+    .container { width: min(1100px, 92%); margin: auto; }
+    header { padding: 28px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+    .logo { font-weight:800; letter-spacing:.08em; font-size:.95rem; }
+    .logo span { color: var(--accent2); }
+    nav a { color:var(--muted); text-decoration:none; margin-left:22px; font-size:.95rem; }
+    nav a:hover { color:var(--text); }
+    .hero { padding: 72px 0 58px; max-width:760px; }
+    .eyebrow { color:var(--accent2); text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:700; }
+    h1 { font-size:clamp(2.6rem, 7vw, 5rem); line-height:1.04; margin:16px 0; letter-spacing:-.055em; }
+    h1 span { background:linear-gradient(90deg, #a99cff, #57e5d1); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p { color:var(--muted); font-size:1.1rem; line-height:1.8; max-width:620px; }
+    .section { padding: 34px 0 54px; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:22px; }
+    h2 { font-size:1.8rem; margin:0 0 7px; }
+    .section-head p { color:var(--muted); margin:0; }
+    .count { color:var(--muted); font-size:.9rem; white-space:nowrap; }
+    .grid { display:grid; grid-template-columns:repeat( auto-fit, minmax(235px, 1fr)); gap:18px; }
+    .card {
+      background:var(--panel); border:1px solid var(--panel-border);
+      border-radius:20px; padding:22px; min-height:220px;
+      display:flex; flex-direction:column; transition:.2s ease;
+      backdrop-filter:blur(12px);
+    }
+    .card:hover { transform:translateY(-5px); border-color:rgba(139,124,255,.65); background:rgba(255,255,255,.10); }
+    .icon {
+      width:48px; height:48px; display:grid; place-items:center;
+      border-radius:14px; font-size:1.45rem; margin-bottom:18px;
+      background:rgba(139,124,255,.17);
+    }
+    .card:nth-child(2) .icon { background:rgba(67,217,197,.15); }
+    .card:nth-child(3) .icon { background:rgba(255,183,77,.15); }
+    .card:nth-child(4) .icon { background:rgba(255,111,145,.15); }
+    .card h3 { margin:0 0 9px; font-size:1.15rem; }
+    .card p { color:var(--muted); line-height:1.6; font-size:.91rem; margin:0 0 20px; overflow-wrap:anywhere; }
+    .actions { display:flex; gap:10px; margin-top:auto; flex-wrap:wrap; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      text-decoration:none; border-radius:11px; padding:10px 14px;
+      font-weight:700; font-size:.88rem; transition:.2s;
+    }
+    .primary { background:linear-gradient(100deg,var(--accent),#6b9cff); color:white; }
+    .secondary { border:1px solid var(--panel-border); color:var(--text); }
+    .btn:hover { filter:brightness(1.12); }
+    .pdf-card { grid-column:1 / -1; min-height:unset; flex-direction:row; align-items:center; gap:18px; }
+    .pdf-card .icon { flex:none; margin:0; background:rgba(255,100,120,.16); }
+    .pdf-info { flex:1; min-width:0; }
+    .pdf-info h3 { overflow-wrap:anywhere; }
+    footer { border-top:1px solid var(--panel-border); padding:25px 0 35px; color:var(--muted); text-align:center; font-size:.88rem; }
+    @media(max-width:600px) {
+      header { align-items:flex-start; flex-direction:column; }
+      nav a { margin:0 16px 0 0; }
+      .hero { padding:48px 0 35px; }
+      .section-head { align-items:flex-start; flex-direction:column; }
+      .pdf-card { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">MY <span>PORTFOLIO</span></div>
+      <nav>
+        <a href="#websites">Websites</a>
+        <a href="#pdf">PDF Files</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">A collection of my work</div>
+        <h1>My Creative <span>Digital World.</span></h1>
+        <p>Welcome to my portfolio! Explore the websites, interactive projects, and presentations I have created.</p>
+      </section>
+
+      <section class="section" id="websites">
+        <div class="section-head">
+          <div>
+            <h2>My Websites</h2>
+            <p>Explore my web projects.</p>
+          </div>
+          <div class="count">04 Projects</div>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="icon">🎨</div>
+            <h3>CSS Designer</h3>
+            <p>A website project focused on CSS design.</p>
+            <div class="actions">
+              <a class="btn primary" href="css_designer.html" target="_blank" rel="noopener">Open Website ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">📊</div>
+            <h3>Big Data</h3>
+            <p>A project about Big Data and its concepts.</p>
+            <div class="actions">
+              <a class="btn primary" href="Big%20Data.html" target="_blank" rel="noopener">Open Website ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">🕵️</div>
+            <h3>Cyber Detective</h3>
+            <p>An interactive project with a cybersecurity theme.</p>
+            <div class="actions">
+              <a class="btn primary" href="cyber_detective_professional.html" target="_blank" rel="noopener">Open Website ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">🗝️</div>
+            <h3>Digital Treasure Hunt</h3>
+            <p>A digital treasure hunt featuring three levels.</p>
+            <div class="actions">
+              <a class="btn primary" href="Digital_Treasure_Hunt_3_Levels.html" target="_blank" rel="noopener">Open Website ↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="pdf">
+        <div class="section-head">
+          <div>
+            <h2>PDF & Presentations</h2>
+            <p>View or download my documents.</p>
+          </div>
+          <div class="count">01 File</div>
+        </div>
+        <div class="grid">
+          <article class="card pdf-card">
+            <div class="icon">📄</div>
+            <div class="pdf-info">
+              <h3>Website UX and UI Design Principles Presentation</h3>
+              <p>PDF Presentation</p>
+              <div class="actions">
+                <a class="btn primary" href="Website%20UX%20and%20UI%20Design%20Principles%20Presentation.pdf" target="_blank" rel="noopener">View PDF ↗</a>
+                <a class="btn secondary" href="Website%20UX%20and%20UI%20Design%20Principles%20Presentation.pdf" download>Download ↓</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>Made with creativity · My Digital Portfolio</footer>
+  </div>
+</body>
+</html>
